@@ -1,0 +1,13 @@
+version: '3'
+services:
+  multi-user login:
+    stdin_open: true
+    restart: always
+    build: .
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/code
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
