@@ -8,6 +8,7 @@ from .authentication import token_required, requires_permission
 from .utils import is_valid
 from .services import create_login
 import datetime
+import os
 
 
 class RegisterView(views.MethodView):
@@ -71,7 +72,7 @@ class LoginView(views.MethodView):
                 if user.email == email and user.password == password:
 
                     token = jwt.encode({'id': user.id, 'role': user.role, 'exp': datetime.datetime.utcnow(
-                    ) + datetime.timedelta(hours=24)}, 'secret_key', 'HS256')
+                    ) + datetime.timedelta(hours=24)}, os.environ.get('SIGNING_KEY'), 'HS256')
                     if role == 'admin':
                         response = jsonify(
                             {"message": "admin login succusfull", "token": token})

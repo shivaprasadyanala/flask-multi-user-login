@@ -16,7 +16,8 @@ def token_required(f):
             response.status_code = 401
             return response
         try:
-            data = jwt.decode(token, 'secret_key', algorithms=['HS256'])
+            data = jwt.decode(token, os.environ.get(
+                'SIGNING_KEY'), algorithms=['HS256'])
             print(data)
             current_user = User.query.filter_by(id=data['id']).first()
 
