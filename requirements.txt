@@ -3,5 +3,6 @@ Flask==2.2.2
 marshmallow==3.19.0
 marshmallow_sqlalchemy==0.28.1
 PyJWT==2.6.0
-Flask-Migrate==4.0.0
-Flask-SQLAlchemy==3.0.2
+flask-migrate==4.0.0
+flask-sqlalchemy==3.0.2
+# mysql-connector-python==8.0.31

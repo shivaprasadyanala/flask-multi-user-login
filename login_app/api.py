@@ -29,8 +29,9 @@ class RegisterView(views.MethodView):
             # if not is_valid(password):
             #     response = jsonify({"message": "Enter a valid password"})
             #     return response
-            validation = validate_email(rec_emil, check_deliverability=True)
-            rec_emil = validation.email
+            ## not working
+            # validation = validate_email(rec_emil, check_deliverability=True)
+            # rec_emil = validation.email
             user = User.query.filter_by(
                 username=request_data['username']).first()
             email = User.query.filter_by(

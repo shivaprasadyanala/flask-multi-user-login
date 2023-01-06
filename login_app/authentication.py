@@ -2,6 +2,7 @@ import jwt
 from flask import request, jsonify
 from .models import User
 from functools import wraps
+import os
 
 
 def token_required(f):
@@ -16,6 +17,7 @@ def token_required(f):
             response.status_code = 401
             return response
         try:
+            type(token)
             data = jwt.decode(token, os.environ.get(
                 'SIGNING_KEY'), algorithms=['HS256'])
             print(data)
@@ -44,8 +46,10 @@ def requires_permission(permission):
                     response.status_code = 401
                     return response
                 try:
-                    data = jwt.decode(token, 'secret_key',
-                                      algorithms=['HS256'])
+                    type(token)
+                    data = jwt.decode(token, os.environ.get(
+                        'SIGNING_KEY'),
+                        algorithms=['HS256'])
                     print(data)
                     if data['role'] != permission:
                         print("hi")
